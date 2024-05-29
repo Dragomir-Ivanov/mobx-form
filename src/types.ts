@@ -29,6 +29,7 @@ export type FieldRegistrant<T = any, Values = any> = {
 export type Disposer = () => void
 
 export type Form<Values = FormValues> = {
+  initialValues: Values
   observableValues: Values
   values: Values
   errors: FormErrors
