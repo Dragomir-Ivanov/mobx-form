@@ -215,6 +215,9 @@ export function useForm<Values extends FormValues>(
     isSubmitting: false,
     isValidating: false,
     isFreezed: false,
+    get initialValues() {
+      return originalValuesRef.current
+    },
     get values() {
       return toJS(form.observableValues)
     },
