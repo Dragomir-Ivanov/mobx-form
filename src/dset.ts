@@ -18,10 +18,21 @@ export function dset(obj: any, keys: any, val: any): void {
     l = keys.length,
     t = obj,
     x,
-    k
+    k,
+    prev
   for (; i < l; ) {
     k = keys[i++]
     if (k === "__proto__" || k === "constructor" || k === "prototype") continue
+    if (val === undefined) {
+      if (i === l) {
+        if (prev) {
+          delete prev[k]
+        } else {
+          delete t[k]
+        }
+        return
+      }
+    }
     t[k] =
       i === l
         ? val
@@ -30,6 +41,7 @@ export function dset(obj: any, keys: any, val: any): void {
         : keys[i] * 0 !== 0 || !!~keys[i].indexOf(".")
         ? {}
         : []
+    prev = t[k]
     t = t[k]
   }
 }
